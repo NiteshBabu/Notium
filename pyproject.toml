@@ -1,0 +1,26 @@
+[project]
+name = "notium"
+version = "0.1.0"
+description = "Notes With Superpowers: Notes API Backend Build With Django & Django Ninja"
+authors = [
+    {name = "NiteshBabu",email = "n.babu@clerkswell.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+django = "^5.0"
+django-ninja = "^1.0"
+PyJWT = "^2.8"
+python-dotenv = "^1.0"
+django-cors-headers = "^4.3"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.0"
+mypy = "^1.5"
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
