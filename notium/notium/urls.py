@@ -3,6 +3,7 @@ from django.urls import path
 from ninja import NinjaAPI
 
 from core.auth import router as auth_router
+from notes.api import router as notes_router
 
 api = NinjaAPI(
     title="Notium",
@@ -11,6 +12,8 @@ api = NinjaAPI(
 )
 
 api.add_router("/auth", auth_router, tags=["authentication"])
+api.add_router("/notes", notes_router, tags=["notes"])
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
