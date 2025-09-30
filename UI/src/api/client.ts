@@ -14,7 +14,7 @@ const apiClient: AxiosInstance = axios.create({
 apiClient.interceptors.request.use(
 	async (config: InternalAxiosRequestConfig) => {
 		const token = localStorage.getItem('token')
-		// await new Promise(res => setTimeout(res, 3000))
+		await new Promise(res => setTimeout(res, 3000))
 		if (token && config.headers) {
 			config.headers.Authorization = `Bearer ${token}`
 		}
