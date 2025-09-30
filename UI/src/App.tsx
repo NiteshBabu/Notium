@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import './global.css'
 import { AppRouter } from './router'
+import { AuthProvider } from './auth/AuthContext'
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -14,7 +15,9 @@ const queryClient = new QueryClient({
 const App = () => {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<AppRouter />
+			<AuthProvider>
+				<AppRouter />
+			</AuthProvider>
 		</QueryClientProvider>
 	)
 }

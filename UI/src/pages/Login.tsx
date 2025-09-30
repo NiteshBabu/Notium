@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useAuth } from '../hooks/use-auth'
+import { useNavigate } from 'react-router-dom'
 
 export const Login = () => {
 	const [username, setUsername] = useState<string>('')
@@ -6,10 +8,23 @@ export const Login = () => {
 	const [error, setError] = useState<string>('')
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
+	const { login } = useAuth()
+	const navigate = useNavigate()
 
-	const handleSubmit = () => {
-    /* to do login */
-  }
+	const handleSubmit = async (e: React.FormEvent): Promise<void> => {
+		e.preventDefault()
+		setError('')
+		setIsLoading(true)
+
+		try {
+			await login({ username, password })
+			navigate('/notes')
+		} catch (err: any) {
+			setError(err.response?.data?.detail || 'Invalid username or password')
+		} finally {
+			setIsLoading(false)
+		}
+	}
 
 	return (
 		<div className='min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8'>
@@ -22,7 +37,7 @@ export const Login = () => {
 						Sign in to your account
 					</h2>
 				</div>
-				<form className='mt-8 space-y-6' onSubmit={() => handleSubmit}>
+				<form className='mt-8 space-y-6' onSubmit={handleSubmit}>
 					{error && (
 						<div className='bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded'>
 							{error}
