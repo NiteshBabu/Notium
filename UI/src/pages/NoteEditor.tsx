@@ -62,7 +62,7 @@ export const NoteEditor = () => {
 				<div className='mb-6'>
 					<button
 						onClick={() => navigate('/notes')}
-						className='text-blue-600 hover:text-blue-800 mb-4 cursor-pointer border py-2 px-4 rounded-md'>
+						className='text-blue-600 hover:text-blue-800  mb-4 cursor-pointer border py-2 px-4 rounded-md focus:outline-none focus:ring-2 ring-offset-2'>
 						← Back to Notes
 					</button>
 					<h1 className='text-3xl font-bold text-gray-900'>
