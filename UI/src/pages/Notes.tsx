@@ -14,7 +14,7 @@ export const Notes = () => {
 	const navigate = useNavigate()
 	const queryClient = useQueryClient()
 
-	const { data: notes = [], isLoading } = useQuery<Note[]>({
+	const { data: notes = [], isFetching } = useQuery<Note[]>({
 		queryKey: ['notes', search, selectedTag, starredFilter],
 		queryFn: () =>
 			notesApi.list({
@@ -28,7 +28,6 @@ export const Notes = () => {
 		queryKey: ['notes'],
 		queryFn: () => notesApi.list(),
 	})
-
 	// Extract unique tags from all notes
 	const allTags = Array.from(
 		new Set(allNotes.flatMap((note) => note.tags.map((tag) => tag.name)))
@@ -46,7 +45,7 @@ export const Notes = () => {
 	}
 
 	return (
-		<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
+		<div className='max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
 			<div className='mb-8'>
 				<div className='flex justify-between items-center mb-6'>
 					<h1 className='text-3xl font-bold text-gray-900'>My Notes</h1>
@@ -60,7 +59,7 @@ export const Notes = () => {
 				<div className='space-y-4'>
 					<div>
 						<input
-							type='text'
+							type='search'
 							placeholder='Search notes...'
 							value={search}
 							onChange={(e) => setSearch(e.target.value)}
@@ -71,13 +70,13 @@ export const Notes = () => {
 					<div className='flex gap-4 flex-wrap'>
 						<div className='flex-1 min-w-[200px]'>
 							<select
-								name='tag'
 								value={selectedTag}
 								onChange={(e) => setSelectedTag(e.target.value)}
-								className='w-full px-5 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'>
-								<option value=''>All Tags</option>
+								className='w-full text-sm px-2 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+								title='Filter by tag'>
+								<option value=''>Tags</option>
 								{allTags.map((tag) => (
-									<option key={tag} value={tag}>
+									<option key={tag} value={tag} className='text-sm'>
 										{tag}
 									</option>
 								))}
@@ -123,7 +122,7 @@ export const Notes = () => {
 				</div>
 			</div>
 
-			<Skeleton isLoading={isLoading}>
+			<Skeleton isLoading={isFetching} className='min-h-[400px]'>
 				{notes.length === 0 ? (
 					<div className='text-center py-12'>
 						<div className='text-gray-500 mb-4'>No notes found.</div>

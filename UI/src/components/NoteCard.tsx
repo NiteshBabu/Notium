@@ -34,7 +34,7 @@ export const NoteCard = ({ note, onStarToggle }: NoteCardProps) => {
 	return (
 		<div
 			onClick={handleClick}
-			className='bg-white rounded-lg shadow-md p-6 cursor-pointer hover:shadow-lg transition-shadow border border-gray-200'>
+			className='bg-white rounded-lg shadow-md p-6 cursor-pointer hover:shadow-lg transition-shadow border border-gray-200 grid gap-2'>
 			<div className='flex items-start justify-between mb-2'>
 				<h3 className='text-xl font-semibold text-gray-900 flex-1 mr-2'>
 					{note.title}
@@ -61,7 +61,7 @@ export const NoteCard = ({ note, onStarToggle }: NoteCardProps) => {
 				</button>
 			</div>
 			<p className='text-gray-600 mb-4 line-clamp-3'>{note.content}</p>
-			<div className='flex flex-wrap gap-2 mb-3'>
+			<div className='flex flex-wrap gap-2'>
 				{note.tags.map((tag) => (
 					<Tag key={tag.id} name={tag.name} />
 				))}
